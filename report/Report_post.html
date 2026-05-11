@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulskan API - Security Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --border-color: #1f2937;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            color: var(--accent-blue);
+            font-family: 'Fira Code', monospace;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background-color: rgba(31, 41, 55, 0.5);
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Fira Code', monospace;
+            margin: 10px 0;
+        }
+
+        .val-critical { color: var(--accent-red); }
+        .val-high { color: var(--accent-yellow); }
+        .val-ok { color: var(--accent-green); }
+        .val-neutral { color: var(--accent-blue); }
+
+        .finding-item {
+            padding: 15px;
+            background-color: rgba(31, 41, 55, 0.3);
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .finding-item.vulnerable {
+            border-left-color: var(--accent-red);
+            background-color: rgba(239, 68, 68, 0.05);
+        }
+
+        .method-badge {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .url-text {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .status-badge {
+            float: right;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .status-200 { color: var(--accent-green); }
+        .status-404 { color: var(--text-muted); }
+        .status-error { color: var(--accent-red); }
+
+        .issues-list {
+            margin-top: 10px;
+            padding-left: 20px;
+            color: var(--accent-red);
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VULSKAN API</h1>
+            <div class="subtitle">Security Assessment Report</div>
+        </header>
+
+        <div class="card">
+            <h2>Overview</h2>
+            <div class="grid">
+                <div class="stat-box">
+                    <div style="color: var(--text-muted)">Target</div>
+                    <div class="url-text" style="margin-top: 10px; font-size: 0.9rem;">https://httpbin.org/get</div>
+                </div>
+                <div class="stat-box">
+                    <div style="color: var(--text-muted)">Endpoints Scanned</div>
+                    <div class="stat-value val-neutral">1</div>
+                </div>
+                <div class="stat-box">
+                    <div style="color: var(--text-muted)">Risk Score</div>
+                    <div class="stat-value val-critical">65.0/100</div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="card" style="border-left: 4px solid var(--accent-red)">
+            <h2>Business Risks</h2>
+            <ul>
+                
+                <li style="margin-bottom: 10px;">⚠️ HIGH: 1 endpoint(s) have significant security gaps.</li>
+                
+            </ul>
+        </div>
+        
+
+        
+        <div class="card" style="border-left: 4px solid var(--accent-green)">
+            <h2>Recommendations</h2>
+            <ul>
+                
+                <li style="margin-bottom: 10px;">✅ Implement API gateway for centralized security</li>
+                
+                <li style="margin-bottom: 10px;">✅ Use HTTPS everywhere (TLS 1.3)</li>
+                
+            </ul>
+        </div>
+        
+
+        <div class="card">
+            <h2>Detailed Findings</h2>
+            
+            
+
+            
+            <div class="finding-item vulnerable">
+                <div style="margin-bottom: 10px;">
+                    <span class="method-badge">GET</span>
+                    <span class="url-text">https://httpbin.org/get/get</span>
+                    <span class="status-badge status-error">
+                        HTTP 
+                    </span>
+                </div>
+                
+                
+
+                
+                <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                    <strong style="color: var(--accent-red)">Vulnerabilities:</strong>
+                    <ul class="issues-list">
+                        
+                        <li>VulnerabilityType.DATA_EXPOSURE</li>
+                        
+                        <li>VulnerabilityType.MISSING_RATE_LIMIT</li>
+                        
+                        <li>VulnerabilityType.CORS_MISCONFIGURATION</li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+            
+        </div>
+
+        <div class="footer">
+            Generated by Vulskan API Security Analyzer • https://httpbin.org/get
+        </div>
+    </div>
+</body>
+</html>
